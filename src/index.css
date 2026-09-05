@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* =========================================
+   THEME – Burgundy × Navy Portfolio
+   ========================================= */
+@theme {
+  /* ---------- Burgundy ---------- */
+  --color-burgundy-50:  #faf7f8;
+  --color-burgundy-100: #f3e9ed;
+  --color-burgundy-200: #e6d3da;
+  --color-burgundy-300: #d9c7cf;
+  --color-burgundy-400: #c16b82;
+  --color-burgundy-500: #a23b57;
+  --color-burgundy-600: #8a2947;
+  --color-burgundy-700: #6e1638;
+  --color-burgundy-800: #530f2b;
+  --color-burgundy-900: #3e0b22;
+
+  /* ---------- Navy ---------- */
+  --color-navy-50:  #f4f6f9;
+  --color-navy-100: #e5e9ef;
+  --color-navy-200: #cbd2dc;
+  --color-navy-300: #aab4c2;
+  --color-navy-400: #778497;
+  --color-navy-500: #4d5a6d;
+  --color-navy-600: #344153;
+  --color-navy-700: #253246;
+  --color-navy-800: #182536;
+  --color-navy-900: #0e1a2b;
+
+  /* ---------- Semantic aliases (optional but handy) ---------- */
+  --color-primary:        var(--color-burgundy-600);
+  --color-primary-light:  var(--color-burgundy-400);
+  --color-primary-dark:   var(--color-burgundy-800);
+  --color-secondary:      var(--color-navy-700);
+  --color-secondary-light:var(--color-navy-500);
+  --color-accent:         var(--color-burgundy-500);
+
+  /* ---------- Fonts ---------- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+
+  /* ---------- Shadows ---------- */
+  --shadow-soft: 0 4px 20px -2px rgb(14 26 43 / 0.08);
+  --shadow-card: 0 10px 30px -5px rgb(14 26 43 / 0.12);
+  --shadow-glow: 0 0 40px -10px rgb(162 59 87 / 0.35);
+
+  /* ---------- Border radius ---------- */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* =========================================
+   BASE STYLES
+   ========================================= */
+@layer base {
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-burgundy-50);
+    color: var(--color-navy-900);
+  }
+
+  /* Nice selection color */
+  ::selection {
+    background-color: var(--color-burgundy-200);
+    color: var(--color-burgundy-900);
+  }
+
+  /* Headings default to serif for elegance */
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =========================================
+   COMPONENT UTILITIES
+   ========================================= */
+@layer components {
+  /* Glass effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-xl);
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           px-6 py-3 rounded-full
+           bg-burgundy-600 text-white font-medium
+           hover:bg-burgundy-700
+           transition-all duration-300
+           shadow-soft hover:shadow-glow;
+  }
+
+  /* Outline / secondary button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center
+           px-6 py-3 rounded-full
+           border-2 border-burgundy-600 text-burgundy-700
+           hover:bg-burgundy-600 hover:text-white
+           transition-all duration-300;
+  }
+
+  /* Section title style */
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl
+           font-serif text-navy-900
+           mb-4;
+  }
+
+  /* Soft card */
+  .card {
+    @apply bg-white rounded-2xl p-6
+           shadow-card
+           border border-navy-100
+           transition-all duration-300
+           hover:-translate-y-1 hover:shadow-glow;
+  }
+
+  /* Navbar link */
+  .nav-link {
+    @apply text-navy-700 font-medium
+           hover:text-burgundy-600
+           transition-colors duration-200
+           relative after:absolute after:bottom-0 after:left-0
+           after:h-[2px] after:w-0 after:bg-burgundy-500
+           after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+}
