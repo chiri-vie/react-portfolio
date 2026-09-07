@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/button";
-import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#", label: "Home" },
@@ -17,7 +16,6 @@ export const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 bg-burgundy-200 w-full py-5 z-10">
       <nav className="container mx-auto px-6 flex items-center justify-between">
-
         {/* Logo */}
         <a
           href="#"
@@ -33,7 +31,7 @@ export const Navbar = () => {
               <a
                 key={index}
                 href={link.href}
-                className="text-burgundy-800 hover:text-burgundy-600 transition-colors duration-200 hover:font-bold focus:font-bold focus:text-burgundy-600"
+                className="nav-link focus:text-primary focus:font-bold"
               >
                 {link.label}
               </a>
@@ -43,27 +41,48 @@ export const Navbar = () => {
 
         {/* Desktop Contact Button */}
         <div className="hidden md:block">
-          <Button size="small">
-            Contact Me
-          </Button>
+          <Button size="small">Contact Me</Button>
         </div>
 
         {/* Mobile Menu Button */}
+        {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-burgundy-800 transition-transform duration-300"
+          className="group relative flex h-11 w-11 items-center justify-center rounded-full text-burgundy-800 transition-all duration-300 hover:bg-white/55 hover:backdrop-blur-md hover:shadow-soft cursor-pointer md:hidden"
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
           aria-label="Toggle navigation menu"
+          aria-expanded={isMobileMenuOpen}
         >
-          {isMobileMenuOpen ? (
-            <X size={24} />
-          ) : (
-            <Menu size={24} />
-          )}
+          <span className="relative block h-5 w-5">
+            {/* Top bar */}
+            <span
+              className={`absolute left-0 top-1/3 h-0.5 w-5 rounded-full bg-current transition-all duration-300 ease-in-out ${
+                isMobileMenuOpen
+                  ? "translate-y-0 rotate-45"
+                  : "-translate-y-1.5"
+              }`}
+            />
+
+            {/* Middle bar */}
+            <span
+              className={`absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rounded-full bg-current transition-all duration-300 ease-in-out ${
+                isMobileMenuOpen ? "scale-0 opacity-0" : ""
+              }`}
+            />
+
+            {/* Bottom bar */}
+            <span
+              className={`absolute left-0 top-1/2 h-0.5 w-5 rounded-full bg-current transition-all duration-300 ease-in-out ${
+                isMobileMenuOpen
+                  ? "translate-y-0 -rotate-45"
+                  : "translate-y-1.5"
+              }`}
+            />
+          </span>
         </button>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 md:hidden glass-strong rounded-b-lg shadow-lg">
+          <div className="absolute top-full left-0 right-0 md:hidden glass-strong rounded-b-lg shadow-lg animate-fade-in">
             <div className="flex flex-col items-center gap-4 py-4">
               {navLinks.map((link, index) => (
                 <a
@@ -75,9 +94,7 @@ export const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <Button size="small">
-                Contact Me
-              </Button>
+              <Button size="small">Contact Me</Button>
             </div>
           </div>
         )}
